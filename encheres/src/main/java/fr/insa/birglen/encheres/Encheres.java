@@ -336,20 +336,73 @@ public class Encheres {
         }
     }
     
+    public static void deleteSchemaEnchere(Connection con) throws SQLException {
+        try ( Statement st = con.createStatement()) {
+            try {
+                st.executeUpdate(
+                        """
+                    drop table enchere
+                    """);
+                System.out.println("table enchere dropped");
+            } catch (SQLException ex) {
+                System.out.println("table enchere déjà inexistante");
+            }
+        }
+    }
+    
+    public static void deleteSchemaAdmin(Connection con) throws SQLException {
+        try ( Statement st = con.createStatement()) {
+            try {
+                st.executeUpdate(
+                        """
+                    drop table enchere
+                    """);
+                System.out.println("table enchere dropped");
+            } catch (SQLException ex) {
+                System.out.println("table enchere déjà inexistante");
+            }
+        }
+    }
+    
     
 
     public static void main(String[] args) {
         
+        //çà à supprimer de là :===>
         try {
             Connection con = defautConnect();
             System.out.println("Connection OK");
             deleteSchemaClient(con);
+            System.out.println("délition de la table Client OK");
+        } catch (ClassNotFoundException ex) {
+            throw new Error(ex);
+        } catch (SQLException ex) {
+            System.out.println("la table Client est déjà supprimée");
+        }
+        
+        try {
+            Connection con = defautConnect();
+            System.out.println("Connection OK");
+            deleteSchemaEnchere(con);
             System.out.println("délition de la table Enchere OK");
         } catch (ClassNotFoundException ex) {
             throw new Error(ex);
         } catch (SQLException ex) {
             System.out.println("la table Enchere est déjà supprimée");
         }
+        
+        try {
+            Connection con = defautConnect();
+            System.out.println("Connection OK");
+            deleteSchemaAdmin(con);
+            System.out.println("délition de la table Admin OK");
+        } catch (ClassNotFoundException ex) {
+            throw new Error(ex);
+        } catch (SQLException ex) {
+            System.out.println("la table Admin est déjà supprimée");
+        }
+        
+        // ===> à là :
         
         //création de la table enchère
         try {
