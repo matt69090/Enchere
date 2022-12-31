@@ -327,11 +327,11 @@ public class Encheres {
             try {
                 st.executeUpdate(
                         """
-                    drop table client
+                    drop table clients
                     """);
-                System.out.println("dable fdbaime dropped");
+                System.out.println("table clients dropped");
             } catch (SQLException ex) {
-                // nothing to do : maybe the table was not created
+                System.out.println("table clients déjà inexistante");
             }
         }
     }
@@ -339,6 +339,17 @@ public class Encheres {
     
 
     public static void main(String[] args) {
+        
+        try {
+            Connection con = defautConnect();
+            System.out.println("Connection OK");
+            deleteSchemaClient(con);
+            System.out.println("délition de la table Enchere OK");
+        } catch (ClassNotFoundException ex) {
+            throw new Error(ex);
+        } catch (SQLException ex) {
+            System.out.println("la table Enchere est déjà supprimée");
+        }
         
         //création de la table enchère
         try {
